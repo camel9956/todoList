@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,4 +21,17 @@ public class appController {
 		model.addAttribute("gender","female");
 		return "person";
 	}
+	
+	
+	@GetMapping("list")
+	public String listNumber(Model model) {
+		ArrayList<Object> list = new ArrayList<>();
+		for (int i = 0; i <= 10; i++) {
+			list.add("This is ArrayList"+i);
+		}
+		model.addAttribute("list",list);
+		return "list";
+	}
+	
+	
 }
