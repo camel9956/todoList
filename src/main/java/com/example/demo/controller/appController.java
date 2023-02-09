@@ -14,5 +14,9 @@ public class appController {
 		return "hello";
 	}
 	
-	
+	@GetMapping("person")
+	public String person(Model model) {
+		model.addAttribute("gender","female");
+		return "person";
+	}
 }
