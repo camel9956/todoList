@@ -20,6 +20,12 @@ public class Todo {
 	@Column
 	Integer status;
 
+	@Column
+    String createTime;
+	
+	@Column
+	String updateTime;
+
 	public Integer getId() {
 		return id;
 	}
@@ -43,7 +49,22 @@ public class Todo {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
-	
-	
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	 
+	 
 }

@@ -1,5 +1,9 @@
 package com.example.demo.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +18,19 @@ public class TodoService {
 	public Iterable<Todo> getTodo(){
 		return todoDao.findAll();
 	}
+
+	public Iterable<Todo> createTodo(Todo todo){
+		//設定日期格式模板
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//設定時區
+		df.setTimeZone(TimeZone.getTimeZone("GMT"));
+		//轉成字串
+		String date = df.format(new Date());
+		todo.setCreateTime(date);
+		todo.setUpdateTime(date);
+		todoDao.save(todo);
+		return getTodo();
+	}
+	
 	
 }
