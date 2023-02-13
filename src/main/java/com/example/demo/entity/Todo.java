@@ -1,5 +1,9 @@
 package com.example.demo.entity;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,16 +19,17 @@ public class Todo {
 	Integer id;
 	
 	@Column
-	String task;
+	String task="";
 	
-	@Column
-	Integer status;
+	@Column(insertable = false,columnDefinition = "int default 1")
+	Integer status = 1;
 
-	@Column
-    String createTime;
+	@Column(updatable = false, nullable = false)
+	Date createTime = new Date();
 	
-	@Column
-	String updateTime;
+	@LastModifiedDate
+	@Column(nullable = false)
+	Date updateTime = new Date();
 
 	public Integer getId() {
 		return id;
@@ -50,21 +55,22 @@ public class Todo {
 		this.status = status;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	 
-	 
+
+	
+	
 }
