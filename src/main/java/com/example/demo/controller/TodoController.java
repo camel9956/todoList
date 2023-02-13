@@ -37,7 +37,7 @@ public class TodoController {
 		Todo emptyTodo = new Todo();
 		model.addAttribute("todolist",newTodoList);
 		model.addAttribute("todoObject",emptyTodo);
-		return "todolist";
+		return "redirect:/todos";
 	}
 
 	@ResponseBody
