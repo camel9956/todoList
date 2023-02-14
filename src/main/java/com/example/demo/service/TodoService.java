@@ -70,8 +70,12 @@ public class TodoService {
 		}
 		Todo newTodo = isExistTodo.get();
 		newTodo.setStatus(todo.getStatus());
-		todoDao.save(newTodo);
-        return true;
+		try {
+			todoDao.save(newTodo);
+			return true;			
+		} catch (Exception e) {
+			return false;			
+		}
 	}
 
 	public Boolean deleteTodo(Integer id) {
@@ -79,7 +83,11 @@ public class TodoService {
 		if (!findTodo.isPresent()) {
 			return false;
 		}
-		todoDao.deleteById(id);
+		try {			
+			todoDao.deleteById(id);
 			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

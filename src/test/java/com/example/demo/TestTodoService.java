@@ -100,4 +100,51 @@ public class TestTodoService {
 				// [Assert] 預期與實際的資料
 		assertEquals(false, actualTodoList);
 	}
+	
+	//Delete成功，找不到id，發生例外
+	@Test
+	public void testDeleteSuccess() {
+		Todo todo = new Todo();
+		todo.setId(1);
+		todo.setTask("洗碗");
+		todo.setStatus(1);
+		Optional<Todo> resTodo = Optional.of(todo);
+		//使用對象方法和預計值
+		Mockito.when(todoDao.findById(1)).thenReturn(resTodo);
+		//操作方法
+		Boolean actualTodoList = todoService.deleteTodo(1);
+		//預計和實際是否相符
+		assertEquals(true, actualTodoList);
+	}
+	
+	@Test
+	public void testDeleteNotExist() {
+		Todo todo = new Todo();
+		todo.setId(1);
+		todo.setTask("洗碗");
+		todo.setStatus(1);
+		Optional<Todo> resTodo = Optional.of(todo);
+		//使用對象方法和預計值
+		Mockito.when(todoDao.findById(100)).thenReturn(Optional.empty());
+		//操作方法
+		Boolean actualTodoList = todoService.deleteTodo(100);
+		//預計和實際是否相符
+		assertEquals(false, actualTodoList);
+	}
+
+	@Test
+	public void testDeleteOccurException() {
+		Todo todo = new Todo();
+		todo.setId(1);
+		todo.setTask("洗碗");
+		todo.setStatus(1);
+		Optional<Todo> resTodo = Optional.of(todo);
+		//使用對象方法和預計值
+		Mockito.when(todoDao.findById(1)).thenReturn(resTodo);
+		doThrow(NullPointerException.class).when(todoDao).deleteById(1);
+		//操作方法
+		Boolean actualTodoList = todoService.deleteTodo(1);
+		//預計和實際是否相符
+		assertEquals(false, actualTodoList);
+	}
 }
